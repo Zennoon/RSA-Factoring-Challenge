@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-"""factor
+"""rsa
 
 Author: Yunus Kedir
 
 This python script is part of the RSA-Factoring-Challenge project. It reads a
 file containing numbers and factorizes the maximum amount of numbers it can
-in 5 seconds.
+into prime factors in 5 seconds.
 
 """
 
@@ -53,7 +53,7 @@ def main():
         num = num.split()
         num_factors = factorize(int(num[0]))
         print("{:d}={:d}*{:d}".format(int(num[0]),
-                                      num_factors[0], num_factors[1]))
+                                      num_factors[1], num_factors[0]))
 
 
 main()
