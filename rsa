@@ -1,0 +1,59 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+"""factor
+
+Author: Yunus Kedir
+
+This python script is part of the RSA-Factoring-Challenge project. It reads a
+file containing numbers and factorizes the maximum amount of numbers it can
+in 5 seconds.
+
+"""
+
+
+import sys
+import math
+
+
+def factorize(num):
+    """Factorizes a given number into two factors, at least one of which is
+    prime.
+
+    Args:
+        num (int): The number to be factorized.
+
+    Returns:
+        factors (tuple): A tuple of the two factors the function has found.
+    """
+    if num % 2 == 0:
+        return (2, num // 2)
+    if num % 3 == 0:
+        return (3, num // 3)
+    div1 = 5
+    div2 = 7
+    i = 1
+    while div1 <= math.sqrt(num) or div2 <= math.sqrt(num):
+        if num % div1 == 0:
+            return (div1, num // div1)
+        if num % div2 == 0:
+            return (div2, num // div2)
+        div1 = (6 * i) + 1
+        div2 = (6 * i) + 5
+        i += 1
+    return (1, num)
+
+
+def main():
+    """Main function. It reads the file and passes the numbers one at a time to
+    the factorize function."""
+    args = sys.argv
+    fp = open(args[1])
+    nums = fp.readlines()
+    for num in nums:
+        num = num.split()
+        num_factors = factorize(int(num[0]))
+        print("{:d}={:d}*{:d}".format(int(num[0]),
+                                      num_factors[0], num_factors[1]))
+
+
+main()
